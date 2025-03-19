@@ -9,13 +9,11 @@ test ("My account using cookie injection", async ({page}) => {
 
     const myAccount = new MyAccount (page);
     await myAccount.visit();
-    await page.pause();
     await page.evaluate(([loginTokenInsideBrowserCode]) => {
         document.cookie = "token=" + loginTokenInsideBrowserCode;
     }, [loginToken]);
     await myAccount.visit();
     await myAccount.waitForPageHeading();
-    await page.pause();
 }) 
 test ("My account mocked error message", async ({page}) => {
 
